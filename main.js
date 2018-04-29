@@ -39,11 +39,11 @@ function ajax_fixer() {
     var href = location.href;
 
         var oldDOM = document.getElementById('soTab');
-        if (oldDOM) {
-            oldDOM.parentNode.removeChild(oldDOM);
+        if (!oldDOM) {
+            soTab_init();
+            href0 = href;
         }
-        soTab_init();
-        href0 = href;
+
 
 }
 
@@ -196,13 +196,18 @@ function soTab_init() {
     key = tmp[0];
 
     //加载css
-    var dom = document.createElement('style'),
-        dom_body = document.getElementsByTagName("body")[0];
+     var oldStyle = document.getElementById('soTabStyle');
+        if (!oldStyle) {
+
+    var dom = document.createElement('style');
+    dom.id="soTabStyle";
+    var dom_body = document.getElementsByTagName("body")[0];
     dom.innerHTML = '.soTab{position:fixed;background-color:#000;opacity:.3;border-radius:40px;color:#fff;padding:15px 20px;bottom:100px;height:40px;width:300px;z-index:9999999;transition:all 400ms}.soTab:hover{left:5px;opacity:1;border-radius:10px;box-shadow:5px -5px 10px #777}.soTab p{margin:0}p.soTab_title{font-weight:bold;margin-bottom:3px}.soTab a{color:#0cf;margin-right:1rem}';
     dom_body.appendChild(dom);
+        }
 
     //生成切换框
-    dom = document.createElement('div');
+    var dom = document.createElement('div');
     dom.id = "soTab";
     var str = "<p class='soTab_title'>soTab 一键切换引擎：</p><p>";
     for (i = 0; i < link.length; i++) {
@@ -212,6 +217,7 @@ function soTab_init() {
     }
     dom.innerHTML = str + '</p>';
     dom.className = "soTab soTab_site" + siteID + " soTab_kind" + kindID;
+    var dom_body = document.getElementsByTagName("body")[0];
     dom_body.appendChild(dom);
 
 }
