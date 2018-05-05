@@ -212,7 +212,7 @@ function soTab_init() {
     var str = "<p class='soTab_title'>soTab 一键切换引擎：</p><p>";
     for (i = 0; i < link.length; i++) {
         if (i != siteID && link[i]) {
-            str += "<a href='" + link[i] + key + "' target='_blank'>" + siteName[i] + "</a>";
+            str += "<a href='" + link[i] + key + "' target='_self'>" + siteName[i] + "</a>";
         }
     }
     dom.innerHTML = str + '</p>';
